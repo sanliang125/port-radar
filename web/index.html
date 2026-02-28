@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Port Radar</title>
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>🔌 <span data-i18n="title">Port Manager</span></h1>
+            <div class="header-actions">
+                <input type="text" id="searchInput" data-i18n-placeholder="searchPlaceholder" />
+                <button id="refreshBtn" class="btn btn-primary">🔍 <span data-i18n="scan">Scan</span></button>
+                <button id="langToggle" class="btn btn-secondary" onclick="toggleLanguage()">🌐 EN</button>
+            </div>
+        </header>
+
+        <main>
+            <div class="stats-bar">
+                <div class="stat-item" data-filter="all" onclick="handleFilter('all')">
+                    <span class="stat-value" id="totalPorts">0</span>
+                    <span class="stat-label" data-i18n="occupiedPorts">Occupied Ports</span>
+                </div>
+                <div class="stat-item" data-filter="marked" onclick="handleFilter('marked')">
+                    <span class="stat-value" id="markedPorts">0</span>
+                    <span class="stat-label" data-i18n="marked">Marked</span>
+                </div>
+                <div class="stat-item" data-filter="docker" onclick="handleFilter('docker')">
+                    <span class="stat-value" id="dockerPorts">0</span>
+                    <span class="stat-label">🐳 Docker</span>
+                </div>
+                <div class="stat-item" data-filter="tcp" onclick="handleFilter('tcp')">
+                    <span class="stat-value" id="tcpPorts">0</span>
+                    <span class="stat-label">TCP</span>
+                </div>
+                <div class="stat-item" data-filter="udp" onclick="handleFilter('udp')">
+                    <span class="stat-value" id="udpPorts">0</span>
+                    <span class="stat-label">UDP</span>
+                </div>
+                <div class="stat-item docker-stat" id="dockerStatItem" style="display:none;">
+                    <span class="stat-value" id="dockerContainers">0</span>
+                    <span class="stat-label" data-i18n="runningContainers">Running Containers</span>
+                </div>
+            </div>
+
+            <table class="port-table">
+                <thead>
+                    <tr>
+                        <th data-i18n="port">Port</th>
+                        <th data-i18n="protocol">Protocol</th>
+                        <th data-i18n="process">Process</th>
+                        <th>PID</th>
+                        <th data-i18n="localAddr">Local Address</th>
+                        <th data-i18n="appMark">App Mark</th>
+                        <th data-i18n="actions">Actions</th>
+                    </tr>
+                </thead>
+                <tbody id="portList">
+                    <tr>
+                        <td colspan="7" class="loading" data-i18n="loading">Loading...</td>
+                    </tr>
+                </tbody>
+            </table>
+        </main>
+
+        <!-- 标记弹窗 -->
+        <div id="modal" class="modal">
+            <div class="modal-content modal-mark">
+                <h2 id="modalTitle" data-i18n="editMark">Edit Mark</h2>
+                <form id="markForm">
+                    <input type="hidden" id="editPort" />
+                    <input type="hidden" id="editProtocol" />
+
+                    <!-- 应用模板选择器 -->
+                    <div class="form-group">
+                        <label data-i18n="appTemplate">App Template</label>
+                        <div class="template-grid" id="templateGrid"></div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="appName"><span data-i18n="appName">App Name</span> *</label>
+                        <input type="text" id="appName" required data-i18n-placeholder="appNamePlaceholder" />
+                    </div>
+                    <div class="form-group">
+                        <label for="description" data-i18n="description">Description</label>
+                        <textarea id="description" data-i18n-placeholder="descriptionPlaceholder"></textarea>
+                    </div>
+                    <div class="modal-actions">
+                        <button type="button" class="btn btn-secondary" onclick="closeModal()" data-i18n="cancel">Cancel</button>
+                        <button type="submit" class="btn btn-primary" data-i18n="save">Save</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        <!-- Docker容器详情弹窗 -->
+        <div id="containerModal" class="modal">
+            <div class="modal-content modal-container">
+                <h2>🐳 <span data-i18n="containerDetail">Container Detail</span></h2>
+                <div id="containerDetail"></div>
+                <div class="modal-actions">
+                    <button type="button" class="btn btn-secondary" onclick="closeContainerModal()" data-i18n="close">Close</button>
+                </div>
+            </div>
+        </div>
+
+        <div id="toast" class="toast"></div>
+    </div>
+
+    <script src="/static/app.js"></script>
+</body>
+</html>

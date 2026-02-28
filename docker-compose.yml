@@ -1,0 +1,22 @@
+version: '3.8'
+
+services:
+  port-radar:
+    build: .
+    image: port-radar:latest
+    container_name: port-radar
+    restart: unless-stopped
+    ports:
+      - "8099:8099"
+    volumes:
+      # 持久化数据库
+      - ./data:/app/data
+      # Docker Socket - 用于容器管理功能
+      - /var/run/docker.sock:/var/run/docker.sock:ro
+    environment:
+      - TZ=Asia/Shanghai
+    # 需要网络权限来扫描端口
+    network_mode: host
+    # 添加 Docker 组权限（用于访问 docker.sock）
+    # group_add:
+    #   - "999"  # Docker 组 ID，根据实际情况调整

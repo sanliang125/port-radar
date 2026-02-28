@@ -1,0 +1,3 @@
+@echo off
+echo Starting port-manager...
+go run main.go
