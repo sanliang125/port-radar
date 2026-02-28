@@ -8,6 +8,12 @@ A lightweight port management tool with port scanning, application labeling, and
 
 [中文文档](README_CN.md)
 
+## 💡 Why Port Radar?
+
+Running multiple Docker containers on your NAS? Tired of port conflicts causing deployment failures?
+
+Port Radar helps you visualize all active ports at a glance, making it easy to identify available ports before deploying new services. Say goodbye to "port already in use" errors!
+
 ## ✨ Features
 
 ### Port Management
