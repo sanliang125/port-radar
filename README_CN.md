@@ -30,9 +30,7 @@
 
 ## 📸 截图
 
-| 端口列表 | Docker容器 |
-|---------|-----------|
-| ![端口列表](docs/screenshot-ports.png) | ![Docker容器](docs/screenshot-docker.png) |
+![端口雷达主界面](docs/img/main.png)
 
 ## 🚀 快速开始
 
@@ -40,7 +38,7 @@
 
 ```bash
 # 使用 docker-compose
-git clone https://github.com/your-username/port-radar.git
+git clone https://github.com/sanliang125/port-radar.git
 cd port-radar
 docker-compose up -d
 
@@ -51,7 +49,7 @@ docker run -d \
   -v /var/run/docker.sock:/var/run/docker.sock:ro \
   -v ./data:/app/data \
   -e TZ=Asia/Shanghai \
-  your-registry/port-radar:latest
+  sanliang125/port-radar:latest
 ```
 
 访问 `http://localhost:8099` 即可使用。
@@ -70,7 +68,7 @@ port-radar.exe
 ### 方式三：源码编译
 
 ```bash
-git clone https://github.com/your-username/port-radar.git
+git clone https://github.com/sanliang125/port-radar.git
 cd port-radar
 go build -o port-radar .
 ./port-radar

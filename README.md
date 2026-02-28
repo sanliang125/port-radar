@@ -30,9 +30,7 @@ A lightweight port management tool with port scanning, application labeling, and
 
 ## 📸 Screenshots
 
-| Port List | Docker Containers |
-|-----------|-------------------|
-| ![Port List](docs/screenshot-ports.png) | ![Docker Containers](docs/screenshot-docker.png) |
+![Port Radar Main Interface](docs/img/main.png)
 
 ## 🚀 Quick Start
 
@@ -40,7 +38,7 @@ A lightweight port management tool with port scanning, application labeling, and
 
 ```bash
 # Using docker-compose
-git clone https://github.com/your-username/port-radar.git
+git clone https://github.com/sanliang125/port-radar.git
 cd port-radar
 docker-compose up -d
 
@@ -51,7 +49,7 @@ docker run -d \
   -v /var/run/docker.sock:/var/run/docker.sock:ro \
   -v ./data:/app/data \
   -e TZ=Asia/Shanghai \
-  your-registry/port-radar:latest
+  sanliang125/port-radar:latest
 ```
 
 Visit `http://localhost:8099` to access the application.
@@ -70,7 +68,7 @@ port-radar.exe
 ### Option 3: Build from Source
 
 ```bash
-git clone https://github.com/your-username/port-radar.git
+git clone https://github.com/sanliang125/port-radar.git
 cd port-radar
 go build -o port-radar .
 ./port-radar
